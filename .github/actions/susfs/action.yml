@@ -126,7 +126,7 @@ runs:
       # static and lacks my_setprocattr + preinit functions that the susfs4ksu
       # 50_add_susfs_in_gki patch extern-declares. This compat layer makes the
       # symbols global and adds preinit support so the link succeeds.
-      if: inputs.root_flavor == 'bakasu'
+      if: (inputs.root_flavor == 'bakasu' || inputs.root_flavor == 'resukisu')
       shell: bash
       working-directory: ${{ github.workspace }}/kernel
       env:
