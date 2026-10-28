@@ -22,7 +22,7 @@ on:
       allow_version_mismatch:
         description: "Force-load modules with mismatched symbol versions ( force check_version() to pass )"
         type: boolean
-        default: false
+        default: true
       kernel_build_version:
         description: "Kernel Version"
         type: choice
@@ -35,12 +35,12 @@ on:
           - 6.1.x-android14
           - 6.6.x-android15
           - 6.12.x-android16
-        default: All
+        default: 6.6.x-android15
       os_patch_level:
         description: "Patch date (YYYY-MM), kernel sublevel, lts, or All (no filter)"
         required: true
         type: string
-        default: All
+        default: 2026-04
       page_size:
         description: "ARM64 page size. 16k requires explicitly selecting Kernel Version 6.1.x-android14, 6.6.x-android15 or 6.12.x-android16 (All is rejected)"
         type: choice
@@ -77,7 +77,7 @@ on:
           - FinaSU
           - No Root
           - All (KernelSU-Next + KernelSU + BakaSU)
-        default: All (KernelSU-Next + KernelSU + BakaSU)
+        default: SukiSU-Ultra
       use_susfs:
         description: "SUSFS"
         type: boolean
@@ -89,7 +89,7 @@ on:
       use_bbg:
         description: "Baseband Guard"
         type: boolean
-        default: true
+        default: false
       use_net:
         description: "Networking"
         type: boolean
@@ -97,7 +97,7 @@ on:
       use_ds:
         description: "DroidSpaces"
         type: boolean
-        default: true
+        default: false
       use_ntsync:
         description: "NTSync"
         type: boolean
@@ -117,7 +117,7 @@ on:
       use_perf:
         description: "Performance"
         type: boolean
-        default: false
+        default: true
       test_release_notes:
         description: "Render release notes preview only (skip all builds + release)"
         type: boolean
@@ -255,7 +255,7 @@ jobs:
           # SukiSU-Ultra: builtin tip (2026-10-21,
           # "kernel: switch sig_fallback hook from weak symbol to static_call");
           # defines fake_state itself, calls the susfs_def.h no_su API -> OK on tips.
-          PIN_SUKISU_ULTRA="05f5cdf082d32bbc651c205ba4bdd1dc66cca7f5"
+          PIN_SUKISU_ULTRA="fa8311f632a215b5381ec644627c6198d1e8a13e"
           # FinaSU: susfs-integrated fork of the tiann restructure; pin tracks
           # the susfs4ksu v2.3 ABI era its supercall dispatch is written against.
           # master tip 3f06a69d (2026-10-21, manager install-page animation;
